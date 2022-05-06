@@ -1,0 +1,273 @@
+CREATE DATABASE IF NOT EXISTS healdroid;
+USE healdroid;
+
+CREATE TABLE `Paciente` (
+  `id` int(10) NOT NULL auto_increment,
+  `numero_ficha` int(10),
+  `rut_paciente` char(20),
+`clave_paciente` char(20),
+`nombre_paciente` char(20),
+`ap_paterno_paciente` char(20),
+`ap_materno_paciente` char(20),
+`fnacimiento_paciente` char(20) ,
+`sexo_paciente` char(20) ,
+`direccion_paciente` char(20),
+`email_paciente` char(20) ,
+`telefono_paciente` int(10) ,
+`nivel_educacional_paciente` char(20) ,
+`prevision_salud_paciente` char(20) ,
+`fregistro_paciente` char(20),
+`estado_usuario_paciente` char(20) ,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `EstadisticaProfesional` (
+  `id` int(10)  NOT NULL auto_increment,
+  `rut_profesional_estadisticaProfesional` char(20) ,
+`num_personas_atendidas_dia_estadisticaProfesional` int(20),
+`num_inasistencias_dia_estadisticaProfesional` int(20) ,
+`num_horacancelada_durante_dia_estadisticaProfesional` int(20) ,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE `Examen` (
+  `id` int(10)  NOT NULL auto_increment,
+  `nombre_examen` char(20) ,
+`tipo_examen` char(20),
+`precio_particular_examen` int(20),
+`descuento_fonasa_examen` int(20),
+`descuento_isapre_examen` int(20),
+`costo_final_examen` int(20),
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `Especialidad` (
+  `id` int(10)  NOT NULL auto_increment,
+  `nombre_especialidad` char(20) ,
+`grupo_sintomas_especialidad` char(20),
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `Control` (
+  `id` int(10)  NOT NULL auto_increment,
+  `numero_ficha_control` int(20) ,
+`fecha_control` char(20),
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `Agenda` (
+  `id` int(10) NOT NULL auto_increment,
+  `dia_disponible_agenda` char(20),
+`hora_disponible_agenda` char(20),
+`rut_profesional_agenda` char(20),
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `Profesional` (
+  `id` int(10) NOT NULL auto_increment,
+  `rut_profesional` char(20),
+  `clave_profesional` char(20),
+`nombre_profesional` char(20),
+`apellido_paterno_profesional` char(20),
+`apellido_materno_profesional` char(20),
+`fnacimiento_profesional` char(20),
+`direccion_profesional` char(20),
+`email_profesional` char(20),
+`telefono_profesional` int(20),
+`nivel_educacional_profesional` char(20) ,
+`titulo_profesional` char(20) ,
+`especialidad_profesional` char(20) ,
+`fregistro_profesional` char(20) ,
+`estado_usuario_profesional` char(20) ,
+`id_agenda_profesional` int(20) ,
+  PRIMARY KEY  (`id`),
+FOREIGN KEY (id_agenda_profesional) REFERENCES Agenda(id) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `RolUsuario` (
+	`id_rol` int(4)  NOT NULL auto_increment,
+	`cod_rol` int(4),
+	`nom_rol` varchar(20),
+	PRIMARY KEY  (`id_rol`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `Usuario` (
+	`id_usu` int(15)  NOT NULL auto_increment,
+	`rut_usu` varchar(20),
+	`mai_usu` varchar(20),
+	`pas_usu` varchar(20),
+	`rol_usu` int(20),
+	PRIMARY KEY  (`id_usu`),
+FOREIGN KEY (rol_usu) REFERENCES RolUsuario(id_rol) 
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `rolusuario` (`id_rol`, `cod_rol`, `nom_rol`) VALUES (NULL, '3', 'paciente'), (NULL, '5', 'profesional');
+
+CREATE TABLE `CitaProfesional` (
+  `id` int(10)  NOT NULL auto_increment,
+  `rut_profesional_citaProfesional` char(20),
+  `rut_paciente_citaProfesional` char(20),
+`fcita_citaProfesional` char(20),
+`numero_ficha_citaProfesional` int(20),
+`estado_cita_citaProfesional` char(20),
+`motivo_consulta_citaProfesional` char(20),
+`fregistro_citaProfesional` char(20),
+`id_paciente_citaProfesional` int(20),
+  PRIMARY KEY  (`id`),
+FOREIGN KEY (id_paciente_citaProfesional) REFERENCES Paciente(id) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `FichaClinica` (
+  `id` int(10)  NOT NULL auto_increment,
+  `rut_paciente_fichaClinica` char(20) ,
+`antec_morbidos_fichaClinica` char(20) ,
+`antec_quirurgicos_fichaClinica` char(20) ,
+`alergias_fichaClinica` char(20),
+`diagnosticos_fichaClinica` char(20),
+`tratamiento_fichaClinica` char(20) ,
+`examenes_fichaClinica` char(20),
+`id_citaservicio_fichaClinica` int(20) ,
+`fregistro_fichaClinica` char(20),
+`id_paciente_fichaClinica` int(20),
+`id_profesional_fichaClinica` int(20),
+`id_control_fichaClinica` int(20),
+`id_examen_fichaClinica` int(20),
+  PRIMARY KEY  (`id`),
+FOREIGN KEY (id_paciente_fichaClinica) REFERENCES Paciente(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (id_profesional_fichaClinica) REFERENCES Profesional(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (id_control_fichaClinica) REFERENCES Control(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (id_examen_fichaClinica) REFERENCES Examen(id) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+Agenda:
+dia_disponible
+hora_disponible
+rut_profesional
+
+Control:
+numero_ficha
+fecha_control
+
+Administrador:
+rut
+clave
+nombre
+cargo
+
+Especialidad:
+nombre_especialidad
+grupo_sintomas
+
+Examen:
+nombre
+tipo
+precio_particular
+descuento_fonasa
+descuento_isapre
+costo_final
+
+FichaClinica:
+rut_paciente
+antec_morbidos
+antec_quirurgicos
+alergias
+diagnosticos
+tratamiento
+examenes
+id_citaservicio
+fecha_registro
+
+
+EstadisticaProfesional:
+rut_profesional
+num_personas_atendidas_dia
+num_inasistencias_dia
+num_horacancelada_durante_dia
+
+
+CitaProfesional
+rut_profesional
+rut_paciente
+fecha-cita
+numero_ficha
+estado_cita
+motivo_consulta
+fecha_registro
+
+
+Profesional:
+rut
+clave
+nombre
+apellido_materno
+apellido_paterno
+fecha_nacimiento
+dirección
+email
+teléfono
+nivel_educacional
+titulo_profesional
+especialidad
+fecha_registro
+estado_usuario
+
+
+Paciente:
+numero_ficha
+rut
+clave
+nombre
+apellido_materno
+apellido_paterno
+fecha_nacimiento
+sexo
+dirección
+email
+teléfono
+nivel_educacional
+prevision_salud
+fecha_registro
+estado_usuario(usuario dado de alta o baja)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Comuna:
+nombre_comuna
+
+Region:
+nombre_region
+
+Pais:
+nombre_pais
+
+Direccion:
+
+
+
+
+
+
+

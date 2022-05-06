@@ -1,0 +1,345 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    font-family: sans-serif, Arial, Helvetica;
+}
+
+
+
+.formulario .caja2{
+    margin-right: 59px;
+}
+
+.inicioSesion{
+    margin: 5px;
+    margin-right: 0px;
+    font-size: 8px;
+    color: red;
+}
+.boton-usuario{
+    margin: 5px 0px;
+}
+
+nav{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: lightblue;
+    height: 40px;
+}
+
+.navegacion{
+    flex-grow: 10;
+}
+.dropdown_session{
+    background-color: rgb(187, 38, 38);
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.dropdown_session a{
+    color: white !important;
+}
+
+
+.dropbtn {
+    padding: 10px 30px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown a{
+     color: blue;
+     font-weight: 700;
+     text-decoration: none;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+  
+  .dropdown-content a {
+    color: blue;
+     font-weight: 500;
+     background-color: lightblue;
+     padding: 5% 10%;
+    text-decoration: none;
+    display: block;
+    z-index: 3;
+  }
+  
+  .dropdown-content a:hover {
+      background-color: rgb(114, 114, 245);
+      color:white;
+      transition: all .3s;
+      
+    }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+    transition: all .3s;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #69d46d;
+    color: white;
+    font-size: 18px;
+    transition: all .3s;
+  }
+
+.padre{
+    display: flex;
+    flex-flow: column nowrap;
+}
+/*lsudnfknbdsbjpknspdkjfnbkjsnpoiutjenrbpogisjgtbpjoeiprjgnwpejrbwipoeroijspjhio*/
+.section{
+    display: flex;
+    background-color: rgb(243, 239, 239);
+}
+
+.articulos{
+    flex:20 1 auto;
+}
+
+.articulo{
+    border: 1px solid rgb(213, 235, 243);
+    flex:1 1 auto;
+    margin: 20px;
+    padding: 20px;
+}
+.respuestaRegistro{
+    background-color: rgb(167, 76, 76);
+    color:white;
+}
+
+
+
+.aside{
+    background-color:rgba(249, 249, 252, 0.918);
+    color: black;
+    border-left: 1px solid rgb(59, 169, 212);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    min-width: 390px;
+}
+.aside form{
+    border-radius: 10%;
+    box-shadow: royalblue;
+}
+
+ .footer{
+     background-color: black;
+     color:white;
+     text-align: center;
+     position: relative;
+     bottom: 0;
+     margin-bottom: 0;
+     width: 100% !important;
+     width: 900px;
+     height: 25px;
+     /*  para que el footer no sea arrastrado por el aside se usa el clear para limpiar los lados. Recordar que los bordes en section 
+     y en aside afectan que no se pueda flotar. Por tanto, si en elementos se agrega bordes y no se quiere aumentar el tamaño del
+     elemento se requiere utilizar la opción de "box-sizing: border-box;" , sirve solo en el mismo elemento y no colocarlo en body.
+     Finalmente formatee todos los elementos a margin 0, padding 0 y que tengan la propiedad box-sizing: borderbox; que es mucho 
+     mejor, porque como no se hereda, sería cacho escribirla en cada elemento a la hora de hacer borde*/
+     /*clear: both;*/
+ }
+ /*   
+ Curso flexbox:
+ Se comienda en el contenedor de los elementos a ordenar con un display: flex;
+ El contenedor entonces se comportará como en bloque. Para que se comporte como inline se debe colocar display: inline-flex;
+ De esta manera se pueden colocar otros elementos al lado del contenedor al comportarse de forma inline.
+ Con flex-direction se ordenan los items dentro del contenedor. El valor por defecto es flex-direction: row;
+ Pero se pueden ordenar en columnas flex-direction: column; también se pueden ordenar de manera invertida...con 
+ flex-direction: row-reverse;  o  flex-direction: column-reverse;
+ Otro elemento importante es el flex-wrap que lo que hace es ver si se mantiene el tamaño de los items internos o no. Por defecto no 
+ está activado, por tanto si colocamos muchos elementos dentro del mismo contenedor este lo tratará de mostrar en una misma fila, 
+ aunque se vean mal los items, pero si lo activamos pues el contenedor puede generar más filas para que se muestren bien los items
+ con este código flex-wrap: wrap;
+ */
+.div{
+    height: 300px;
+}
+/*overflow:scroll;
+clear: both;
+
+*/
+
+
+.contenedor_itemPadre{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 5px;
+    padding-left: 70px;
+}
+
+.contenedor_item1,.contenedor_item2,.contenedor_item3,.contenedor_item4,.contenedor_item5{
+    width: 240px;
+    height: 240px;
+    z-index: 4;
+}
+
+.img_items1{
+    width: 240px;
+    height: 240px;
+    margin: 30px;
+    border-radius:5px;
+    border: 1px solid rgb(50, 159, 202);
+    clear: both;
+    background: url(../img/informacionProfesional.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img_items2{
+    width: 240px;
+    height: 240px;
+    margin: 30px;
+    border-radius:5px;
+    border: 1px solid rgb(50, 159, 202);
+    clear: both;
+    background: url(../img/modificarInfoProfesional.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img_items3{
+    width: 240px;
+    height: 240px;
+    margin: 30px;
+    border-radius:5px;
+    border: 1px solid rgb(50, 159, 202);
+    clear: both;
+    background: url(../img/verInfoProfesional.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img_items4{
+    width: 240px;
+    height: 240px;
+    margin: 30px;
+    border-radius:5px;
+    border: 1px solid rgb(50, 159, 202);
+    clear: both;
+    background: url(../img/ingresar_horas.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img_items5{
+    width: 240px;
+    height: 240px;
+    margin: 30px;
+    border-radius:5px;
+    border: 1px solid rgb(50, 159, 202);
+    clear: both;
+    background: url(../img/verHorasReservadas.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedor_item1{
+    width: 240px;
+    height: 240px;
+    
+}
+.contenedor_item2{
+    width: 240px;
+    height: 240px;
+    
+}
+.contenedor_item3{
+    width: 240px;
+    height: 240px;
+    
+}
+.contenedor_item4{
+    width: 240px;
+    height: 240px;
+    
+}
+.contenedor_item5{
+    width: 240px;
+    height: 240px;
+    
+}
+
+/*estilo de Vista\profesionalesSalud\ingresarInformacion.php*/
+.contenedor_padre{
+    height: 1500px;
+    width: 90%;
+    margin-left: 100px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    background-color: rgb(243, 239, 239);
+    /*border: 3px solid red;*/
+    
+}
+
+body{
+    background-color: rgb(243, 239, 239);
+}
+
+.formulario_profesional{
+    margin-top: 30px !important;
+    margin-bottom: 50px;
+    padding: 20px;
+    width: 600px;
+    height: 1300px;
+    border: 1px solid rgb(95, 208, 212);
+    box-shadow: 6px 6px 6px teal;
+}
+i{
+    color:red;
+    font-weight: 900;
+}
+h3{
+    text-align: center;
+}
+.h_advertencia{
+    color:red;
+}
+
+
+.exito_guardar{
+    margin: 5px;
+    margin-right: 0px;
+    font-size: 14px;
+    color: red;
+}
+
+.btn{
+    margin-left: 140px;
+    font-weight: 700;
+    font-size: 16px;
+    color:rgb(23, 183, 231);
+    border: 1px solid rgb(15, 155, 236);
+    border-radius: 13px;
+    padding: 3px 8px;
+}
+.btn:hover{
+    color:white;
+    background-color: rgb(108, 209, 108);
+}
