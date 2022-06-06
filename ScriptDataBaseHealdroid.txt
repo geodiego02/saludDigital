@@ -98,13 +98,14 @@ CREATE TABLE `Usuario` (
 	`id_usu` int(15)  NOT NULL auto_increment,
 	`rut_usu` varchar(20),
 	`mai_usu` varchar(20),
-	`pas_usu` varchar(20),
+	`pas_usu` varchar(40),
 	`rol_usu` int(20),
 	PRIMARY KEY  (`id_usu`),
 FOREIGN KEY (rol_usu) REFERENCES RolUsuario(id_rol) 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `rolusuario` (`id_rol`, `cod_rol`, `nom_rol`) VALUES (NULL, '3', 'paciente'), (NULL, '5', 'profesional');
+INSERT INTO `rolusuario` (`id_rol`, `cod_rol`, `nom_rol`) VALUES (NULL, '3', 'paciente'), 
+(NULL, '5', 'profesional');
 
 CREATE TABLE `CitaProfesional` (
   `id` int(10)  NOT NULL auto_increment,
@@ -141,6 +142,174 @@ FOREIGN KEY (id_profesional_fichaClinica) REFERENCES Profesional(id) ON DELETE R
 FOREIGN KEY (id_control_fichaClinica) REFERENCES Control(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 FOREIGN KEY (id_examen_fichaClinica) REFERENCES Examen(id) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+create table `pais`(
+	`id` int NOT null AUTO_INCREMENT,
+    `nom` varchar(50),
+    PRIMARY KEY (`id`)
+);
+
+create TABLE `region`(
+	`id` int NOT null AUTO_INCREMENT,
+    `nom_reg` varchar(50),
+    `id_pais` int(10),
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (id_pais) REFERENCES pais(id)
+);
+
+create table `ciudad`(
+	`id` int not null AUTO_INCREMENT,
+    `nom_ciu` varchar(50),
+    `id_region` int(5),
+    `id_pais` int(5),
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (id_region) REFERENCES region(id),
+    FOREIGN KEY (id_pais) REFERENCES pais(id)
+);
+
+INSERT INTO `pais` (`id`, `nom`) VALUES (NULL, 'Chile'), (NULL, 'Argentina'),(NULL, 'Perú'), (NULL, 'Bolivia'),
+(NULL, 'Ecuador'),(NULL, 'Colombia'),(NULL, 'Uruguay'),(NULL, 'Paraguay'),(NULL, 'México'),(NULL, 'Panamá');
+
+insert into `region` (`id`,`nom_reg`,`id_pais`) values (null,'Región Metropolitana de Santiago','1'),
+(null,'Región de Arica y Parinacota','1'),(null,'Región de Tarapacá','1'),(null,'Región de Antofagasta','1'),
+(null,'Región de Atacama','1'),(null,'Región de Coquimbo','1'),(null,'Región de Valparaíso','1'),
+(null,'Región del Libertador General Bernardo O\'Higgins','1'),(null,'Región del Maule','1'),
+(null,'Región de Ñuble','1'),(null,'Región del Biobío','1'),(null,'Región de La Araucanía','1'),
+(null,'Región de Los Rios','1'),(null,'Región de Los Lagos','1'),
+(null,'Región de Aysén del G. Carlos Ibañez del Campo','1'),(null,'Región de Magallanes','1');
+
+insert into `ciudad` values (null,'Alhué','1','1'),(null,'Buin','1','1'),(null,'Calera de Tango','1','1'),(null,'Cerrillos','1','1'),
+(null,'Cerro Navia','1','1'),
+(null,'Colina','1','1'),(null,'Conchalí','1','1'),(null,'Curacaví','1','1'),(null,'El Bosque','1','1'),(null,'El Monte','1','1'),
+(null,'Estación Central','1','1'),(null,'Huechuraba','1','1'),
+(null,'Independencia','1','1'),(null,'Isla de Maipo','1','1'),(null,'Lampa','1','1'),(null,'La Cisterna','1','1'),
+(null,'La Florida','1','1'),(null,'La Granja','1','1'),(null,'La Pintana','1','1'),
+(null,'La Reina','1','1'),(null,'Las Condes','1','1'),(null,'Lo Barnechea','1','1'),(null,'Lo Espejo','1','1'),
+(null,'Lo Prado','1','1'),(null,'Macul','1','1'),(null,'Maipú','1','1'),
+(null,'María Pinto','1','1'),(null,'Melipilla','1','1'),(null,'Ñuñoa','1','1'),(null,'Padre Hurtado','1','1'),(null,'Paine','1','1'),
+(null,'Pedro Aguirre Cerda','1','1'),(null,'Peñaflor','1','1'),
+(null,'Peñalolén','1','1'),(null,'Pirque','1','1'),(null,'Providencia','1','1'),(null,'Pudahuel','1','1'),(null,'Puente Alto','1','1'),
+(null,'Quilicura','1','1'),(null,'Quinta Normal','1','1'),
+(null,'Recoleta','1','1'),(null,'Renca','1','1'),(null,'San Bernardo','1','1'),(null,'San Joaquín','1','1'),(null,'San José de Maipo','1','1'),
+(null,'San Miguel','1','1'),(null,'San Pedro','1','1'),
+(null,'San Ramón','1','1'),(null,'Santiago','1','1'),(null,'Talagante','1','1'),(null,'Til-Til','1','1'),(null,'Vitacura','1','1');
+
+INSERT INTO `ciudad` VALUES (NULL, 'Arica','2','1'),(NULL, 'Camarones','2','1'),(NULL, 'General LAgos','2','1'),
+(NULL, 'Parinacota','2','1'),(NULL, 'Putre','2','1');
+
+INSERT INTO `ciudad` VALUES (NULL, 'Alto Hospicio','3','1'),(NULL, 'Camiña','3','1'),(NULL, 'Colchane','3','1'),
+(NULL, 'Huara','3','1'),
+(NULL, 'Iquique','3','1'),(NULL, 'Pica','3','1'),(NULL, 'Pozo Almonte','3','1');
+
+INSERT INTO `ciudad` VALUES (NULL, 'Antofagasta','4','1'),(NULL, 'Calama','4','1'),(NULL, 'María Elena','4','1'),(NULL, 'Mejillones','4','1'),
+(NULL, 'Ollagüe','4','1'),(NULL, 'San Pedro de Atacama','4','1'),(NULL, 'Sierra Gorda','4','1'),(NULL, 'Taltal','4','1'),
+(NULL, 'Tocopilla','4','1');
+
+INSERT INTO `ciudad` VALUES (NULL, 'Alto del Carmen','5','1'),(NULL, 'Caldera','5','1'),(NULL, 'Chañaral','5','1'),(NULL, 'Copiapó','5','1'),
+(NULL, 'Diego de Almagro','5','1'),(NULL, 'Freirina','5','1'),(NULL, 'Huasco','5','1'),(NULL, 'Tierra Amarilla','5','1'),(NULL, 'Vallenar','5','1');
+
+INSERT INTO `ciudad` VALUES (NULL, 'Andacollo','6','1'),(NULL, 'Canela','6','1'),(NULL, 'Combarbalá','6','1'),(NULL, 'Coquimbo','6','1'),
+(NULL, 'Illapel','6','1'),(NULL, 'La Higuera','6','1'),(NULL, 'La Serena','6','1'),(NULL, 'Los Vilos','6','1'),(NULL, 'Monte Patria','6','1'),
+(NULL, 'Ovalle','6','1'),(NULL, 'Paihuano','6','1'),(NULL, 'Punitaqui','6','1'),(NULL, 'Río Hurtado','6','1'),(NULL, 'Salamanca','6','1'),
+(NULL, 'Vicuña','6','1');
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Algarrobo','7','1'),(NULL, 'Cabildo','7','1'),(NULL, 'Calle Larga','7','1'),
+(NULL, 'Cartagena','7','1'),(NULL, 'Casablanca','7','1'),(NULL, 'Catemu','7','1'),(NULL, 'Concón','7','1'),
+(NULL, 'El Quisco','7','1'),(NULL, 'El Tabo','7','1'),(NULL, 'Hijuelas','7','1'),(NULL, 'Isla de Pascua','7','1'),
+(NULL, 'Juan Fernández','7','1'),(NULL, 'La Calera','7','1'),(NULL, 'La Cruz','7','1'),(NULL, 'La Ligua','7','1'),
+(NULL, 'Limache','7','1'),(NULL, 'Llaillay','7','1'),(NULL, 'Los Andes','7','1'),(NULL, 'Nogales','7','1'),(NULL, 'Olmué','7','1'),
+(NULL, 'Panquehue','7','1'),(NULL, 'Papudo','7','1'),(NULL, 'Petorca','7','1'),(NULL, 'Puchuncaví','7','1'),(NULL, 'Putaendo','7','1'),
+(NULL, 'Quillota','7','1'),(NULL, 'Quilpué','7','1'),(NULL, 'Quintero','7','1'),(NULL, 'Rinconada','7','1'),
+(NULL, 'Santa María','7','1'),(NULL, 'Santo Domingo','7','1'),(NULL, 'San Antonio','7','1'),(NULL, 'San Esteban','7','1'),
+(NULL, 'San Felipe','7','1'),(NULL, 'Valparaíso','7','1'),(NULL, 'Villa Alemana','7','1'),(NULL, 'Viña del Mar','7','1'),
+(NULL, 'Zapallar','7','1');
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Chépica','8','1'),(NULL, 'Chimbarongo','8','1'),(NULL, 'Codegua','8','1'),
+(NULL, 'Coinco','8','1'),(NULL, 'Coltauco','8','1'),(NULL, 'Doñihue','8','1'),(NULL, 'Graneros','8','1'),
+(NULL, 'La Estrella','8','1'),(NULL, 'Las Cabras','8','1'),(NULL, 'Litueche','8','1'),(NULL, 'Lolol','8','1'),
+(NULL, 'Machalí','8','1'),(NULL, 'Malloa','8','1'),(NULL, 'Marchihue','8','1'),(NULL, 'Mostazal','8','1'),
+(NULL, 'Nancagua','8','1'),(NULL, 'Navidad','8','1'),(NULL, 'Olivar','8','1'),(NULL, 'Palmilla','8','1'),
+(NULL, 'Paredones','8','1'),(NULL, 'Peralillo','8','1'),(NULL, 'Peumo','8','1'),(NULL, 'Pichidegua','8','1'),
+(NULL, 'Pichilemu','8','1'),(NULL, 'Placilla','8','1'),(NULL, 'Pumanque','8','1'),(NULL, 'Quinta de Tilcoco','8','1'),
+(NULL, 'Rancagua','8','1'),(NULL, 'Rengo','8','1'),(NULL, 'Requínoa','8','1'),(NULL, 'San Fernando','8','1'),
+(NULL, 'San Vicente','8','1'),(NULL, 'Santa Cruz','8','1');
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Cauquenes','9','1'),(NULL, 'Chanco','9','1'),(NULL, 'Colbún','9','1'),
+(NULL, 'Constitución','9','1'),(NULL, 'Curepto','9','1'),(NULL, 'Curicó','9','1'),(NULL, 'Empedrado','9','1'),
+(NULL, 'Hualañé','9','1'),(NULL, 'Licantén','9','1'),(NULL, 'Linares','9','1'),(NULL, 'Longaví','9','1'),
+(NULL, 'Maule','9','1'),(NULL, 'Molina','9','1'),(NULL, 'Parral','9','1'),(NULL, 'Pelarco','9','1'),
+(NULL, 'Pelluhue','9','1'),(NULL, 'Pencahue','9','1'),(NULL, 'Rauco','9','1'),(NULL, 'Retiro','9','1'),
+(NULL, 'Río Claro','9','1'),(NULL, 'Romeral','9','1'),(NULL, 'Sagrada Familia','9','1'),(NULL, 'San Clemente','9','1'),
+(NULL, 'San Javier','9','1'),(NULL, 'San Rafael','9','1'),(NULL, 'Talca ','9','1'),(NULL, 'Teno','9','1'),
+(NULL, 'Vichuquén','9','1'),(NULL, 'Villa Alegre','9','1'),(NULL, 'Yerbas Buenas','9','1');
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Chillán','10','1'),(NULL, 'Cobquecura','10','1'),(NULL, 'Coelemu','10','1'),
+(NULL, 'Coihueco','10','1'),(NULL, 'Bulnes','10','1'),(NULL, 'Chillán Viejo','10','1'),(NULL, 'El Carmen','10','1'),
+(NULL, 'Ninhue','10','1'),(NULL, 'Ñiquén','10','1'),(NULL, 'Pemuco','10','1'),(NULL, 'Pinto','10','1'),
+(NULL, 'Portezuelo','10','1'),(NULL, 'Quillón','10','1'),(NULL, 'Quirihue','10','1'),(NULL, 'Ránquil','10','1'),
+(NULL, 'San Carlos','10','1'),(NULL, 'San Fabián','10','1'),(NULL, 'San Ignacio','10','1'),(NULL, 'San Nicolás','10','1'),
+(NULL, 'Treguaco','10','1'),(NULL, 'Yungay','10','1');
+
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Alto Biobío','11','1'),(NULL, 'Antuco','11','1'),(NULL, 'Arauco','11','1'),
+(NULL, 'Cabrero','11','1'),(NULL, 'Cañete','11','1'),(NULL, 'Chiguayante','11','1'),(NULL, 'Concepción','11','1'),
+(NULL, 'Contulmo','11','1'),(NULL, 'Coronel','11','1'),(NULL, 'Curanilahue','11','1'),(NULL, 'Florida','11','1'),
+(NULL, 'Hualpén','11','1'),(NULL, 'Hualqui','11','1'),(NULL, 'Laja','11','1'),(NULL, 'Lebu','11','1'),
+(NULL, 'Los Alamos','11','1'),(NULL, 'Los Angeles','11','1'),(NULL, 'Lota','11','1'),(NULL, 'Mulchén','11','1'),
+(NULL, 'Nacimiento','11','1'),(NULL, 'Negrete','11','1'),(NULL, 'Penco','11','1'),(NULL, 'Quilaco','11','1'),
+(NULL, 'Quilleco','11','1'),(NULL, 'San Pedro de la Paz','11','1'),(NULL, 'San Rosendo','11','1'),(NULL, 'Santa Bárbara','11','1'),
+(NULL, 'Santa Juana','11','1'),(NULL, 'Talcahuano','11','1'),(NULL, 'Tirúa','11','1'),(NULL, 'Tomé','11','1'),
+(NULL, 'Tucapel','11','1'),(NULL, 'Yumbel','11','1');
+
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Angol','12','1'),(NULL, 'Carahue','12','1'),(NULL, 'Cholchol','12','1'),
+(NULL, 'Collipulli','12','1'),(NULL, 'Cunco','12','1'),(NULL, 'Curacautín','12','1'),(NULL, 'Curarrehue','12','1'),
+(NULL, 'Ercilla','12','1'),(NULL, 'Freire','12','1'),(NULL, 'Galvarino','12','1'),(NULL, 'Gorbea','12','1'),
+(NULL, 'Lautaro','12','1'),(NULL, 'Loncoche','12','1'),(NULL, 'Lonquimay','12','1'),(NULL, 'Los Sauces','12','1'),
+(NULL, 'Lumaco','12','1'),(NULL, 'Melipeuco','12','1'),(NULL, 'Nueva Imperial','12','1'),(NULL, 'Padre Las Casas','12','1'),
+(NULL, 'Perquenco','12','1'),(NULL, 'Pitrufquén','12','1'),(NULL, 'Pucón','12','1'),(NULL, 'Purén','12','1'),
+(NULL, 'Renaico','12','1'),(NULL, 'Saavedra','12','1'),(NULL, 'Temuco','12','1'),(NULL, 'Teodoro Schmidt','12','1'),
+(NULL, 'Toltén','12','1'),(NULL, 'Traiguén','12','1'),(NULL, 'Victoria','12','1'),(NULL, 'Vilcún','12','1'),
+(NULL, 'Villarica','12','1');
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Corral','13','1'),(NULL, 'Futrono','13','1'),(NULL, 'Lanco','13','1'),
+(NULL, 'La Unión','13','1'),(NULL, 'Lago Ranco','13','1'),(NULL, 'Los Lagos','13','1'),(NULL, 'Máfil','13','1'),
+(NULL, 'Mariquina','13','1'),(NULL, 'Paillaco','13','1'),(NULL, 'Panguipulli','13','1'),(NULL, 'Río Bueno','13','1'),
+(NULL, 'Valdivia','13','1');
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Ancud','14','1'),(NULL, 'Calbuco','14','1'),(NULL, 'Castro','14','1'),
+(NULL, 'Chaitén','14','1'),(NULL, 'Chonchi','14','1'),(NULL, 'Cochamó','14','1'),(NULL, 'Curaco de Vélez','14','1'),
+(NULL, 'Dalcahue','14','1'),(NULL, 'Fresia','14','1'),(NULL, 'Frutillar','14','1'),(NULL, 'Futaleufú','14','1'),
+(NULL, 'Hualaihué','14','1'),(NULL, 'Llanquihue','14','1'),(NULL, 'Los Muermos','14','1'),(NULL, 'Maullín','14','1'),
+(NULL, 'Osorno','14','1'),(NULL, 'Palena','14','1'),(NULL, 'Puerto Montt','14','1'),(NULL, 'Puerto Octay','14','1'),
+(NULL, 'Puerto Varas','14','1'),(NULL, 'Puqueldón','14','1'),(NULL, 'Purranque','14','1'),(NULL, 'Puyehue','14','1'),
+(NULL, 'Queilén','14','1'),(NULL, 'Quellón','14','1'),(NULL, 'Quemchi','14','1'),(NULL, 'Quinchao','14','1'),
+(NULL, 'Río Negro','14','1'),(NULL, 'San Juan de la Costa','14','1'),(NULL, 'San Pablo','14','1');
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Aysén','15','1'),(NULL, 'Chile Chico','15','1'),(NULL, 'Cisnes','15','1'),
+(NULL, 'Cochrane','15','1'),(NULL, 'Coyhaique','15','1'),(NULL, 'Guaitecas','15','1'),(NULL, 'Lago Verde','15','1'),
+(NULL, 'O\'Higgins','15','1'),(NULL, 'Río Ibáñez','15','1'),(NULL, 'Tortel','15','1');
+
+
+
+INSERT INTO `ciudad` VALUES (NULL, 'Laguna Blanca','16','1'),(NULL, 'Natales','16','1'),(NULL, 'Porvenir','16','1'),
+(NULL, 'Primavera','16','1'),(NULL, 'Punta Arenas','16','1'),(NULL, 'Río Verde','16','1'),(NULL, 'San Gregorio','16','1'),
+(NULL, 'Timaukel','16','1'),(NULL, 'Torres del Paine','16','1');
+
+
+
+
 
 Agenda:
 dia_disponible
@@ -231,40 +400,6 @@ nivel_educacional
 prevision_salud
 fecha_registro
 estado_usuario(usuario dado de alta o baja)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Comuna:
-nombre_comuna
-
-Region:
-nombre_region
-
-Pais:
-nombre_pais
-
-Direccion:
-
 
 
 
